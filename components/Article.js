@@ -114,3 +114,57 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+const articles = document.querySelector('.articles')
+
+function articleMaker(articleObject) {
+
+  const article = document.createElement('div')
+  const articleTitle = document.createElement('h2')
+  const articleDate = document.createElement('p')
+  const articleParagraphOne = document.createElement('p')
+  const articleParagraphTwo = document.createElement('p')
+  const articleParagraphThree = document.createElement('p')
+  const articleExpandButton = document.createElement('button')
+
+  article.appendChild(articleTitle)
+  article.appendChild(articleDate)
+  article.appendChild(articleParagraphOne)
+  article.appendChild(articleParagraphTwo)
+  article.appendChild(articleParagraphThree)
+  article.appendChild(articleExpandButton)
+
+  article.classList.add("article")
+  articleDate.classList.add("date")
+  articleExpandButton.classList.add("expandButton")
+
+  articleTitle.textContent = articleObject.title
+  articleDate.textContent = articleObject.date
+  articleParagraphOne.textContent = articleObject.firstParagraph
+  articleParagraphTwo.textContent = articleObject.secondParagraph
+  articleParagraphThree.textContent = articleObject.thirdParagraph
+
+  articleExpandButton.addEventListener('click', evt => {
+    article.classList.toggle('article-open')
+  })
+
+  return article
+}
+
+const newArticle =  {
+  title: `The Beginning`,
+  date: `December 13, 1991`,
+  firstParagraph: `It was the best of times and worst of times`,
+
+  secondParagraph: `And things just kept getting worse. `,
+
+  thirdParagraph: `But there was a bright light at the end of it all.`
+}
+
+data.push(newArticle)
+
+data.forEach(articleObject => {
+  const theArticle = articleMaker(articleObject)
+  articles.appendChild(theArticle)
+})
+
